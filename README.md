@@ -91,4 +91,12 @@ if everything complete, open the folder of project, then run:
 <b>"docker-compose up -d"</b>.
 it would download all the server you need to run the docker container. 
 7. check if all server is running, using <i>docker ps<i/>
-8. Acces localhost:8080 to use the aplication, acces localhost:8100 to use phpmyadmin.
+8. Login to your mysql-master, then run this sql comand:
+    - GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'password';
+        its creating user to replication.
+9. Login to mysql-slave, then run this sql comand:
+    - CHANGE MASTER TO MASTER_HOST='mysql-master',MASTER_USER='slave_user', MASTER_PASSWORD='password';
+    - Start Slave;
+    then, the slave already running.
+    
+10. Acces localhost:8080 to use the aplication, acces localhost:8100 to use phpmyadmin.
