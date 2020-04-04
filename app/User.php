@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function messages()
+{
+    return $this->hasMany(Message::class);
+}
     use Notifiable;
 
     /**
@@ -37,3 +41,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+

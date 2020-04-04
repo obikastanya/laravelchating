@@ -45,7 +45,7 @@ services:
     hostname: 'master'
     container_name: 'mysql-master'
     ports:
-      - '3306'
+      - '32770:3306'
     volumes:
       - $PWD/master/conf.d:/etc/mysql/mysql.conf.d/
       - $PWD/master/data:/var/lib/mysql
@@ -59,7 +59,7 @@ services:
     hostname: 'slave'
     container_name: 'mysql-slave'
     ports:
-      - '3306'
+      - '32771:3306'
     volumes:
       - $PWD/slave/conf.d:/etc/mysql/mysql.conf.d/
       - $PWD/slave/data:/var/lib/mysql
