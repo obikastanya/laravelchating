@@ -76,3 +76,19 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+<b>How To Use The Aplication</b>
+
+1. Clone or Download the Project from my github repo. 
+2. Install Dependencies:
+    Using <i>composer install</i> and <i> npm install</i>
+3. Create your own Pusher Key. You could search the tutorial on internet. 
+4. Add your pusher key to .env
+5. Create the database and run php artisan migrate. 
+6. Run NPM run Dev
+if everything complete, open the folder of project, then run:
+<b>"docker-compose up -d"</b>.
+it would download all the server you need to run the docker container. 
+7. check if all server is running, using <i>docker ps<i/>
+8. Acces localhost:8080 to use the aplication, acces localhost:8100 to use phpmyadmin.
