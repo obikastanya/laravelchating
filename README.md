@@ -32,23 +32,23 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <b>How To Use The Aplication</b>
 
-1. Clone or Download the Project from my github repo. 
-2. Install Dependencies:
+<b>1. Clone or Download the Project from my github repo. </b>
+<b>2. Install Dependencies:</b>
     Using <i>composer install</i> and <i> npm install</i>
-3. Create your own Pusher Key. You could search the tutorial on internet. 
-4. Add your pusher key to .env
-5. Create the database and run php artisan migrate. 
-6. Run NPM run Dev
-if everything complete, open the folder of project, then run:
-<b>"docker-compose up -d"</b>.
+<b>3. Create your own Pusher Key. You could search the tutorial on internet. </b>
+<b>4. Add your pusher key to .env</b>
+<b>5. Create the database and run php artisan migrate. </b>
+<b>6. Run NPM run Dev</b>
+    if everything complete, open the folder of project, then run:
+    <b>"docker-compose up -d"</b>.
 it would download all the server you need to run the docker container. 
-7. check if all server is running, using <i>docker ps<i/>
-8. Login to your mysql-master, then run this sql comand:
+<b>7. check if all server is running, using <i>docker ps</i></b>
+<b>8. Login to your mysql-master, then run this sql comand:</b>
     - GRANT REPLICATION SLAVE ON *.* TO 'slave_user'@'%' IDENTIFIED BY 'password';
         its creating user to replication.
-9. Login to mysql-slave, then run this sql comand:
+<b>9. Login to mysql-slave, then run this sql comand:</b>
     - CHANGE MASTER TO MASTER_HOST='mysql-master',MASTER_USER='slave_user', MASTER_PASSWORD='password';
     - Start Slave;
     then, the slave already running.
     
-10. Acces localhost:8080 to use the aplication, acces localhost:8100 to use phpmyadmin.
+<b>10. Acces localhost:8080 to use the aplication, acces localhost:8100 to use phpmyadmin.</b>
