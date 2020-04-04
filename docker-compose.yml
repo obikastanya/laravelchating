@@ -1,0 +1,72 @@
+version: '2'
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    volumes:
+      - ./:/var/www
+    ports:
+      - "8080:80"
+    links:
+      - app
+
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    volumes:
+      - ./:/var/www
+    links:
+      - mysql-master
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql-master"
+  cache:
+    image: redis:latest
+    ports: 
+      - "63791:6379"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: laravel6_dataadmin
+    links:
+      - mysql-master
+    environment:
+      PMA_HOST: mysql-master
+      PMA_PORT: "3306"
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8100:80"
+
+  mysql-master:
+    image: 'mysql:5.6'
+    hostname: 'master'
+    container_name: 'mysql-master'
+    ports:
+      - '3306'
+    volumes:
+      - $PWD/master/conf.d:/etc/mysql/mysql.conf.d/
+      - $PWD/master/data:/var/lib/mysql
+      - $PWD/master/log:/var/log/mysql
+      - $PWD/master/backup:/backup
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=larachat_fix
+  mysql-slave:
+    image: 'mysql:5.6'
+    hostname: 'slave'
+    container_name: 'mysql-slave'
+    ports:
+      - '3306'
+    volumes:
+      - $PWD/slave/conf.d:/etc/mysql/mysql.conf.d/
+      - $PWD/slave/data:/var/lib/mysql
+      - $PWD/slave/log:/var/log/mysql
+      - $PWD/slave/backup:/backup
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=larachat_fix
+    depends_on:
+      - mysql-master
