@@ -13,7 +13,7 @@ class ProfileController extends Controller
 {
     public function index(){
         $id =Auth::user()->id;
-        $data =User::where('id', $id)->first()->get();
+        $data =User::where('id', $id)->get();
         foreach($data as $d){
             $user[0]=$d->name;
             $user[1]=$d->tgl_lahir;
@@ -25,7 +25,6 @@ class ProfileController extends Controller
     
     public function update(Request $request){
         $id =Auth::user()->id;
-
         $user= User::find($id);
         $hasher=app('hash');
         if($hasher->check($request->password, $user->password)){
@@ -44,6 +43,7 @@ class ProfileController extends Controller
     }
     public function updatePassword(Request $request){
         $id =Auth::user()->id;
+        
         $user= User::find($id);
         $hasher=app('hash');
         if($request->newPassword==$request->passwordConfirm){

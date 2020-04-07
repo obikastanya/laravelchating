@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+    .logoutlink{
+        margin-left:10%;
+    }
     .chat {
         list-style: none;
         margin: 0;
