@@ -19,3 +19,6 @@ Route::group(['middleware' => 'auth'], function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile/update', 'ProfileController@update')->name('update_it');
+Route::post('/profile/update-password', 'ProfileController@updatePassword')->name('update-password');

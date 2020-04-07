@@ -59,8 +59,16 @@
 </style>
 </head>
 <body>
+@if(session()->has('message'))
+        <div class="alert alert-success fade show" role="alert">
+        {{ session()->get('message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        @endif
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#f58258">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -88,18 +96,23 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="dropdown-menu dropdown-menu-right bg-success"  aria-labelledby="navbarDropdown">
+                                
+                                        <form action="{{ route('profile') }}" method="post"  class="dropdown-item">
+                                        @csrf
+                                        <input type="hidden" name="nama" value={{ Auth::user()->name }}>
+                                        <button type="submit" class="btn btn-link" style="color:black">Profile</button>
+                                        </form>
+                                    <a class="dropdown-item logoutlink" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                                     document.getElementById('logout-form').submit();"> <strong>
+                                        {{ __('Logout') }}</strong>
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
